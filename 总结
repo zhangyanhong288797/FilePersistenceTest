@@ -1,2 +1,31 @@
  本次实践主要是完成文件存储并将文件保存到本地 
  还有在第二次打开时完成还原数据操作
+文件存储是 Android 中最基本的一种数据存储方式。
+它不对存储的内容进行任何的格式化处理，所有数据都是原封不动地保存到文件当中的，因而它比较适合用于存储一些简单的文本数据或二进制数据。
+
+存储数据：
+Context 类中提供了一个 openFileOutput () 方法，用于将数据存储到指定的文件中。
+第一个参数：文件名。
+第二个参数：文件的操作模式。
+MODE_PRIVATE：默认，当指定同样文件名的时候，所写入的内容将会覆盖原文件中的内容。
+MODE_APPEND：如果该文件已存在就往文件里面追加内容，不存在就创建新文件。
+返回一个 FileOutputStream 对象。
+2. 所有的文件都是默认存储到以下目录下：
+/data/data/<package name>/files/
+3. 输出流：
+通过 openFileOutput() 方法能够得到一个 FileOutputStream 对象。
+然后再借助它构建出一个 OutputStreamWriter 对象。
+接着再使用 OutputStreamWriter 构建出一个 BufferedWriter 对象。
+这样就可以通过 BufferedWriter 来将文本内容写入到文件中了。
+
+
+读取数据：
+1. Context 类中提供了一个 openFileInput () 方法，用于从文件中读取数据。
+第一个参数：文件名。
+返回一个 FileInputStream 对象。
+2. 输入流：
+首先通过 openFileInput() 方法获取到了一个 FileInputStream 对象。
+然后借助它又构建出了一个 InputStreamReader 对象。
+接着再使用 InputStreamReader 构建出一个 BufferedReader 对象。
+这样就可以通过 BufferedReader 进行一行行地读取。
+3. 把文件中所有的文本内容全部读取出来并存放在一个 StringBuilder 对象中，最后将读取到的内容返回就可以了。
